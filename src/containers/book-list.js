@@ -6,10 +6,12 @@ import { bindActionCreators } from 'redux';
 
 class BookList extends Component {
   renderList() {
+    //this.props.books is from mapStateToProps
     return this.props.books.map((book) => {
       return (
         <li
           key={book.title}
+          //selectBook is from dispatch (the key)
           onClick={() => this.props.selectBook(book)}
           className="list-group-item">{book.title}
         </li>
@@ -27,7 +29,7 @@ class BookList extends Component {
 }
 
 function mapStateToProps(state) {
-  // return value here shows up as props in booklist (our container)
+  // state = application state. Return value here shows up as props in booklist (our container)
   return {
     books: state.books
   };
@@ -35,7 +37,7 @@ function mapStateToProps(state) {
 
 //Return value of this function will be props of Booklist container
 function mapDispatchToProps(dispatch) {
-  // whenever selectBook is called the result should be passed to all our reducers
+  // dispatch recieves result of selectBook(action) and spits out to all reducers
   return bindActionCreators({ selectBook: selectBook }, dispatch)
 }
 
